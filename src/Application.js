@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import HighScore from './HighScore';
 
 class Application extends Component {
     constructor(props){
@@ -22,6 +23,13 @@ class Application extends Component {
             this.setState({overTen: true});
         }
     }
+
+    resetCount = (e) => {
+        this.setState({
+            count: 0,
+            overTen: false
+        });
+    }
  
     render(){
         let name = "Dong-Gil";
@@ -32,14 +40,13 @@ class Application extends Component {
                 <h1>Hello, {name}</h1>
                 <hr>
                 </hr>
-                <span>You Clicked the button {count} times</span>
-                <hr></hr>
-                {(this.state.overTen) ? 
-                    <span>Beat high score of 10!</span>
-                    : null
-                }
+                <h2>You Clicked the button {count} times</h2>
+                <HighScore 
+                    overTen={this.state.overTen}
+                    onReset={this.resetCount}
+                />
                 <span>
-                    <button onClick={(e) => this.handleClick()}>Click me</button>
+                    <button onClick={this.handleClick}>Click me</button>
                 </span>
             </div>
         );
